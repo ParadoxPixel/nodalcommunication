@@ -1,0 +1,7 @@
+/.idea/
+/target/
+# Project exclude paths
+/discovery/target/
+/dsljson/target/
+/redis/target/
+/request/target/
