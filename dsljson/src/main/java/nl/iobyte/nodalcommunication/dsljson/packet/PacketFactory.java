@@ -42,10 +42,10 @@ public class PacketFactory implements IPacketFactory {
      * @return IPacket<PacketPayload>
      */
     public IPacket<?> create(String node_id, String channel, IPacketPayload payload) {
-        if(!(payload instanceof PacketPayload pp))
+        if(!(payload instanceof PacketPayload))
             return null;
 
-        return new Packet(node_id, channel, pp);
+        return new Packet(node_id, channel, (PacketPayload) payload);
     }
 
 }

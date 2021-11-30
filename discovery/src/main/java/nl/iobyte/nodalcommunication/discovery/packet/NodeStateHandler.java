@@ -5,7 +5,15 @@ import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
 import nl.iobyte.nodalcommunication.Node;
 
-public record NodeStateHandler(DiscoveryWrapper wrapper, Node node) implements IPacketHandler<NodeState> {
+public class NodeStateHandler implements IPacketHandler<NodeState> {
+
+    private final DiscoveryWrapper wrapper;
+    private final Node node;
+
+    public NodeStateHandler(DiscoveryWrapper wrapper, Node node) {
+        this.wrapper = wrapper;
+        this.node = node;
+    }
 
     /**
      * {@inheritDoc}

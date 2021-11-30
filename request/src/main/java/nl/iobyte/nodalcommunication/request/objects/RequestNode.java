@@ -7,7 +7,17 @@ import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacketHandler;
 import nl.iobyte.nodalcommunication.request.objects.packet.RequestPayload;
 import java.util.concurrent.CompletableFuture;
 
-public record RequestNode(Node node, String channel, RequestProvider provider) {
+public class RequestNode {
+
+    private final Node node;
+    private final String channel;
+    private final RequestProvider provider;
+
+    public RequestNode(Node node, String channel, RequestProvider provider) {
+        this.node = node;
+        this.channel = channel;
+        this.provider = provider;
+    }
 
     /**
      * Start request node

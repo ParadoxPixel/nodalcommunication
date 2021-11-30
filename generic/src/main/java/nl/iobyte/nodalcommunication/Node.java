@@ -134,8 +134,8 @@ public class Node {
             return;
 
         //Set node to packet if possible
-        if(packet instanceof AbstractPacket<?> ap)
-            ap.setNode(this);
+        if(packet instanceof AbstractPacket<?>)
+            ((AbstractPacket<?>) packet).setNode(this);
 
         List<Channel<?>> list = channels.get(id);
         if(list == null || list.isEmpty())
