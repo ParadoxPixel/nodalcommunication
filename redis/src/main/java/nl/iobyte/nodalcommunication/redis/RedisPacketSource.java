@@ -5,10 +5,10 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 import io.lettuce.core.pubsub.api.async.RedisPubSubAsyncCommands;
+import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
 import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
-import nl.iobyte.nodalcommunication.interfaces.ISerializer;
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,7 +27,7 @@ public class RedisPacketSource implements IPacketSource {
     private RedisPubSubAsyncCommands<String, String> asyncSub;
 
     //Listeners
-    private final List<String> listeners = new ArrayList<>();
+    private final List<String> nodeListeners = new ArrayList<>();
 
     public RedisPacketSource(String host, int port, boolean use_ssl, String password) {
         assert host != null;
@@ -48,14 +48,17 @@ public class RedisPacketSource implements IPacketSource {
     /**
      * {@inheritDoc}
      * @param target String
-     * @param channel String
-     * @param message byte[]
+     * @param packet IPacket<?>
      */
-    public void send(String target, String channel, String message) {
+    public void send(Node node, String target, IPacket<?> packet) {
         if(!enabled.get())
             return;
 
-        asyncPub.publish(channel, target+"_"+message);
+        String message = node.getFactory().getSerializer().serialize(packet);
+        if(message == null)
+            return;
+
+        asyncPub.publish(packet.getChannel(), target+"_"+message);
     }
 
     /**
@@ -67,8 +70,8 @@ public class RedisPacketSource implements IPacketSource {
         if(!enabled.get())
             return;
 
-        if(!listeners.contains(node.getId())) {
-            listeners.add(node.getId());
+        if(!nodeListeners.contains(node.getId())) {
+            nodeListeners.add(node.getId());
             redisSubConnection.addListener(new RedisListener(node));
         }
 
@@ -78,14 +81,12 @@ public class RedisPacketSource implements IPacketSource {
     /**
      * {@inheritDoc}
      * @param id String
-     * @param serializer ISerializer
      * @param factory IPacketFactory
      * @return Node
      */
-    public Node newNode(String id, ISerializer serializer, IPacketFactory factory) {
+    public Node newNode(String id, IPacketFactory factory) {
         return new Node(
                 id,
-                serializer,
                 this,
                 factory
         );

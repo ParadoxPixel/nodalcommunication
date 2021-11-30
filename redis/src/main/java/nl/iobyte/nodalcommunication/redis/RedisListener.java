@@ -1,10 +1,11 @@
 package nl.iobyte.nodalcommunication.redis;
 
 import io.lettuce.core.pubsub.RedisPubSubAdapter;
+import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.namespace.NamespaceComparator;
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.Node;
 import java.nio.charset.StandardCharsets;
-import java.util.Comparator;
+import java.util.concurrent.ForkJoinPool;
 
 public class RedisListener extends RedisPubSubAdapter<String, String> {
 
@@ -29,7 +30,20 @@ public class RedisListener extends RedisPubSubAdapter<String, String> {
         if(comparator.compare(parts[0]) < 0)
             return;
 
-        node.handle(channel, parts[1].getBytes(StandardCharsets.UTF_8));
+        if(!parts[1].startsWith("{"))
+            return;
+
+        //Run async
+        ForkJoinPool.commonPool().execute(() -> {
+            IPacket<?> packet = node.getFactory().getSerializer().deserialize(
+                    parts[1].getBytes(StandardCharsets.UTF_8),
+                    node.getFactory().getType()
+            );
+            if(packet == null)
+                return;
+
+            node.handle(packet);
+        });
     }
 
 }

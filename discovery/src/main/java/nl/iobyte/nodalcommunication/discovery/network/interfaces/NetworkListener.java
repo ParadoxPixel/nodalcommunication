@@ -1,4 +1,4 @@
-package nl.iobyte.nodalcommunication.discovery.network.objects;
+package nl.iobyte.nodalcommunication.discovery.network.interfaces;
 
 public interface NetworkListener {
 

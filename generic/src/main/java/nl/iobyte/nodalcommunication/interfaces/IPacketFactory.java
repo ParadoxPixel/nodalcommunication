@@ -7,9 +7,15 @@ public interface IPacketFactory {
 
     /**
      * Get class of IPacket extension
-     * @return Class<? extends IPacket>
+     * @return Class<? extends IPacket<?>>
      */
-    Class<? extends IPacket> getClazz();
+    Class<? extends IPacket<?>> getType();
+
+    /**
+     * Get serializer
+     * @return ISerializer
+     */
+    ISerializer getSerializer();
 
     /**
      * Create packet

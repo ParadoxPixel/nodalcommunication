@@ -6,7 +6,7 @@ import net.jodah.expiringmap.ExpiringMap;
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestHandler;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacketHandler;
 import nl.iobyte.nodalcommunication.request.objects.Request;

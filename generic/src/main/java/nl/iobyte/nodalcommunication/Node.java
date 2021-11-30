@@ -1,23 +1,22 @@
-package nl.iobyte.nodalcommunication.objects;
+package nl.iobyte.nodalcommunication;
 
 import nl.iobyte.nodalcommunication.interfaces.*;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.objects.AbstractPacket;
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 
 public class Node {
 
     private final String id;
-    private final ISerializer serializer;
     private IPacketSource source;
     private final IPacketFactory factory;
     private final Map<String, List<Channel<?>>> channels = new HashMap<>();
 
-    public Node(String id, ISerializer serializer, IPacketSource source, IPacketFactory factory) {
+    public Node(String id, IPacketSource source, IPacketFactory factory) {
         this.id = id;
-        this.serializer = serializer;
         this.source = source;
         this.factory = factory;
     }
@@ -31,10 +30,34 @@ public class Node {
     }
 
     /**
+     * Get source of Node
+     * @return IPacketSource
+     */
+    public IPacketSource getSource() {
+        return source;
+    }
+
+    /**
      * Change source of Node
      */
     public void setSource(IPacketSource source) {
         this.source = source;
+    }
+
+    /**
+     * Get packet factory
+     * @return IPacketFactory
+     */
+    public IPacketFactory getFactory() {
+        return factory;
+    }
+
+    /**
+     * Get type of packet
+     * @return Class<?>
+     */
+    public Class<?> getType() {
+        return factory.getType();
     }
 
     /**
@@ -52,13 +75,8 @@ public class Node {
         if(packet == null)
             return;
 
-        //Object to String
-        String str = serializer.serialize(packet);
-        if(str == null)
-            return;
-
         //Send on channel
-        source.send(target, packet.getChannel(), str);
+        source.send(this, target, packet);
     }
 
     /**
@@ -82,12 +100,15 @@ public class Node {
         //Get channels
         List<Channel<?>> list = channels.computeIfAbsent(
                 channel_id,
-                key -> new ArrayList<>()
+                key -> {
+                    source.register(this, channel_id);
+                    return new ArrayList<>();
+                }
         );
 
         //Find channel or create new
         Channel<T> channel = (Channel<T>) list.stream()
-                .filter(ch -> ch.getClazz() == clazz)
+                .filter(ch -> ch.geType() == clazz)
                 .findAny()
                 .orElse(null);
 
@@ -102,39 +123,42 @@ public class Node {
 
         //Register handler
         channel.register(handler);
-
-        //Register at source
-        source.register(this, channel_id);
     }
 
     /**
      * Handle incoming message
-     * @param id String
-     * @param bytes byte[]
+     * @param packet IPacket<?>
      */
-    public void handle(String id, byte[] bytes) {
-        if(!channels.containsKey(id))
+    public void handle(IPacket<?> packet) {
+        if(!channels.containsKey(packet.getChannel()))
             return;
 
-        //Get applicable channels
-        channels.get(id)
-                //Handle async for all channels
-                .forEach(channel -> ForkJoinPool.commonPool()
-                        .execute(() -> {
+        //Set node to packet if possible
+        if(packet instanceof AbstractPacket<?> ap)
+            ap.setNode(this);
 
-                            //String to channel specific object
-                            IPacket<?> packet = serializer.deserialize(bytes, factory.getClazz());
-                            if(packet == null)
-                                return;
+        List<Channel<?>> list = channels.get(id);
+        if(list == null || list.isEmpty())
+            return;
 
-                            //Set node to packet if possible
-                            if(packet instanceof AbstractPacket<?> ap)
-                                ap.setNode(this);
+        //If only 1 handler, handle in current Thread
+        if(list.size() == 1) {
+            list.get(0).handleRaw(packet);
+            return;
+        }
 
-                            //Handle message
-                            channel.handleRaw(packet);
-                        })
-                );
+        //New Thread for each handler(reuse current) to run in parallel
+        int i = 0;
+        for(Channel<?> channel : list) {
+            //New Thread, except last entry
+            if((i++ + 1) < list.size()) {
+                ForkJoinPool.commonPool().execute(() -> channel.handleRaw(packet));
+                continue;
+            }
+
+            //Handle in current thread
+            channel.handleRaw(packet);
+        }
     }
 
 }

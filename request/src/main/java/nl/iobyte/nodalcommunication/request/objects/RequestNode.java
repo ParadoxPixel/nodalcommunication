@@ -1,7 +1,7 @@
 package nl.iobyte.nodalcommunication.request.objects;
 
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.request.RequestProvider;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacketHandler;
 import nl.iobyte.nodalcommunication.request.objects.packet.RequestPayload;

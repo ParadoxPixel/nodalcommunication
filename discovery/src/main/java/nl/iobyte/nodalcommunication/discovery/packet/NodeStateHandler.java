@@ -3,7 +3,7 @@ package nl.iobyte.nodalcommunication.discovery.packet;
 import nl.iobyte.nodalcommunication.discovery.DiscoveryWrapper;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.Node;
 
 public record NodeStateHandler(DiscoveryWrapper wrapper, Node node) implements IPacketHandler<NodeState> {
 

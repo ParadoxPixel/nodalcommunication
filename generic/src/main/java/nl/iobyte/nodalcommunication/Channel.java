@@ -1,4 +1,4 @@
-package nl.iobyte.nodalcommunication.objects;
+package nl.iobyte.nodalcommunication;
 
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
@@ -27,10 +27,10 @@ public class Channel<T extends IPacketPayload> {
     }
 
     /**
-     * Get clazz of channel message
+     * Get type of channel message
      * @return Class<T>
      */
-    public Class<T> getClazz() {
+    public Class<T> geType() {
         return clazz;
     }
 
@@ -75,7 +75,7 @@ public class Channel<T extends IPacketPayload> {
      * @param obj Object
      */
     @SuppressWarnings("unchecked")
-    public void handleRaw(Object obj) {
+    public void handleRaw(IPacket<?> obj) {
         assert obj != null;
 
         //Cast

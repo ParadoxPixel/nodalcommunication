@@ -1,7 +1,7 @@
-package nl.iobyte.nodalcommunication.discovery.network.interfaces;
+package nl.iobyte.nodalcommunication.discovery.network.objects;
 
 import nl.iobyte.nodalcommunication.discovery.namespace.NamespaceSet;
-import nl.iobyte.nodalcommunication.discovery.network.objects.NetworkListener;
+import nl.iobyte.nodalcommunication.discovery.network.interfaces.NetworkListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;

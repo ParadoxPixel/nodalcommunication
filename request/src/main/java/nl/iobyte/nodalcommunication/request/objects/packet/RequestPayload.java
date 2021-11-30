@@ -43,6 +43,16 @@ public class RequestPayload extends PacketPayload {
     }
 
     /**
+     * Get request payload as type
+     * @param clazz Class<T>
+     * @param <T> extends PacketPayload
+     * @return T
+     */
+    public <T extends PacketPayload> T getPayloadAs(Class<T> clazz) {
+        return payload.asType(clazz);
+    }
+
+    /**
      * Set request payload
      * @param payload PacketPayload
      */

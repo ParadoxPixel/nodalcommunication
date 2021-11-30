@@ -1,14 +1,13 @@
 package nl.iobyte.nodalcommunication.discovery;
 
-import nl.iobyte.nodalcommunication.discovery.network.interfaces.Network;
+import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.discovery.network.objects.Network;
 import nl.iobyte.nodalcommunication.discovery.packet.NodeState;
 import nl.iobyte.nodalcommunication.discovery.packet.NodeStateHandler;
 import nl.iobyte.nodalcommunication.dsljson.JsonWrapper;
 import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
 import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
-import nl.iobyte.nodalcommunication.interfaces.ISerializer;
-import nl.iobyte.nodalcommunication.objects.Node;
-import java.nio.charset.StandardCharsets;
+import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,8 +21,8 @@ public class DiscoveryWrapper extends JsonWrapper {
         super(source);
     }
 
-    public DiscoveryWrapper(ISerializer serializer, IPacketSource source, IPacketFactory factory) {
-        super(serializer, source, factory);
+    public DiscoveryWrapper(IPacketSource source, IPacketFactory factory) {
+        super(source, factory);
     }
 
     /**
@@ -44,33 +43,30 @@ public class DiscoveryWrapper extends JsonWrapper {
 
     /**
      * {@inheritDoc}
+     * @param node Node
      * @param target String
-     * @param channel String
-     * @param message String
+     * @param packet IPacket<?>
      */
-    public void send(String target, String channel, String message) {
+    public void send(Node node, String target, IPacket<?> packet) {
         //Check if Node is local
         if(nodes.containsKey(target)) {
             //Skip packet source
-            nodes.get(target).handle(channel, message.getBytes(StandardCharsets.UTF_8));
+            nodes.get(target).handle(packet);
             return;
         }
 
         //Send through packet source
-        super.send(target, channel, message);
+        super.send(node, target, packet);
     }
 
     /**
      * {@inheritDoc}
      * @param id String
-     * @param serializer ISerializer
      * @param factory IPacketFactory
      * @return Node
      */
-    public Node newNode(String id, ISerializer serializer, IPacketFactory factory) {
+    public Node newNode(String id, IPacketFactory factory) {
         assert id != null;
-        assert serializer != null;
-        assert factory != null;
 
         //Lowercase
         id = id.toLowerCase(Locale.ROOT);
@@ -81,7 +77,7 @@ public class DiscoveryWrapper extends JsonWrapper {
             return node;
 
         //Node instance
-        node = super.newNode(id);
+        node = super.newNode(id, factory);
         node.setSource(this);
         nodes.put(id, node);
 
@@ -94,7 +90,7 @@ public class DiscoveryWrapper extends JsonWrapper {
      * @return Node
      */
     public Node newNode(String id) {
-        return this.newNode(id, getSerializer(), getFactory());
+        return this.newNode(id, getFactory());
     }
 
     /**

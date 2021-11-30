@@ -1,5 +1,6 @@
 package nl.iobyte.nodalcommunication.objects;
 
+import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
 
@@ -29,8 +30,6 @@ public abstract class AbstractPacket<T extends IPacketPayload> implements IPacke
      * @param payload Object
      */
     public void reply(String channel, IPacketPayload payload) {
-        assert channel != null;
-        assert payload != null;
         if(node == null)
             return;
 
@@ -44,9 +43,6 @@ public abstract class AbstractPacket<T extends IPacketPayload> implements IPacke
      * @param payload Object
      */
     public void send(String target, String channel, IPacketPayload payload) {
-        assert target != null;
-        assert channel != null;
-        assert payload != null;
         if(node == null)
             return;
 

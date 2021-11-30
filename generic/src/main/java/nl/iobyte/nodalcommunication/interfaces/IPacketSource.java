@@ -1,25 +1,17 @@
 package nl.iobyte.nodalcommunication.interfaces;
 
-import nl.iobyte.nodalcommunication.objects.Node;
+import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.Node;
 
 public interface IPacketSource {
 
     /**
      * Send message on channel to target
+     * @param node Node
      * @param target String
-     * @param channel String
-     * @param message String
+     * @param packet IPacket<?>
      */
-    void send(String target, String channel, String message);
-
-    /**
-     * Broadcast message
-     * @param channel String
-     * @param message String
-     */
-    default void broadcast(String channel, String message) {
-        send("**", channel, message);
-    }
+    void send(Node node, String target, IPacket<?> packet);
 
     /**
      * Register listening to channel
@@ -31,11 +23,10 @@ public interface IPacketSource {
     /**
      * Get Node from Source
      * @param id String
-     * @param serializer ISerializer
      * @param factory IPacketFactory
      * @return Node
      */
-    Node newNode(String id, ISerializer serializer, IPacketFactory factory);
+    Node newNode(String id, IPacketFactory factory);
 
     /**
      * Start source
