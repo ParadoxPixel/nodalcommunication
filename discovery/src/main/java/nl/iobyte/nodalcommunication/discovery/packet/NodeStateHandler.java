@@ -1,9 +1,9 @@
 package nl.iobyte.nodalcommunication.discovery.packet;
 
 import nl.iobyte.nodalcommunication.discovery.DiscoveryWrapper;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketHandler;
+import nl.iobyte.nodalcommunication.generic.Node;
 
 public class NodeStateHandler implements IPacketHandler<NodeState> {
 

@@ -1,6 +1,6 @@
-package nl.iobyte.nodalcommunication.objects;
+package nl.iobyte.nodalcommunication.generic.objects;
 
-import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketSource;
 import java.util.ArrayList;
 import java.util.List;
 

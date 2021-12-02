@@ -1,4 +1,4 @@
-package nl.iobyte.nodalcommunication.interfaces.packet;
+package nl.iobyte.nodalcommunication.generic.interfaces.packet;
 
 public interface IPacketHandler<T extends IPacketPayload> {
 

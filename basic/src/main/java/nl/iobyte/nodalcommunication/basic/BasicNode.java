@@ -1,11 +1,11 @@
 package nl.iobyte.nodalcommunication.basic;
 
-import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.generic.Node;
 import nl.iobyte.nodalcommunication.discovery.DiscoveryWrapper;
 import nl.iobyte.nodalcommunication.discovery.network.objects.Network;
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketHandler;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
 import nl.iobyte.nodalcommunication.request.RequestProvider;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacketHandler;
 import nl.iobyte.nodalcommunication.request.objects.packet.RequestPayload;

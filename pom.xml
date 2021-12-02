@@ -53,17 +53,33 @@
                             <minimizeJar>true</minimizeJar>
                             <relocations>
                                 <relocation>
-                                    <pattern>io.</pattern>
-                                    <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.io</shadedPattern>
+                                    <pattern>net.</pattern>
+                                    <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.net.</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>com.dslplatform.</pattern>
-                                    <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.com.dslplatform</shadedPattern>
+                                    <pattern>com.</pattern>
+                                    <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.com.</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>de.</pattern>
+                                    <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.de.</shadedPattern>
                                 </relocation>
                             </relocations>
                             <filters>
                                 <filter>
+                                    <artifact>net.jodah:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
                                     <artifact>com.dslplatform:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>de.mkammerer:*</artifact>
                                     <excludes>
                                         <exclude>META-INF/*.MF</exclude>
                                     </excludes>

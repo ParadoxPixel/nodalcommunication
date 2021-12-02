@@ -1,10 +1,10 @@
-package nl.iobyte.nodalcommunication;
+package nl.iobyte.nodalcommunication.generic;
 
-import nl.iobyte.nodalcommunication.interfaces.*;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
-import nl.iobyte.nodalcommunication.objects.AbstractPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.*;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketHandler;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.objects.AbstractPacket;
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 

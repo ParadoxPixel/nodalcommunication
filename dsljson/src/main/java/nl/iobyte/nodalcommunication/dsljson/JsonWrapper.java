@@ -1,11 +1,11 @@
 package nl.iobyte.nodalcommunication.dsljson;
 
-import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.generic.Node;
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketFactory;
-import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
-import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.objects.AbstractPacketSource;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketFactory;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketSource;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.objects.AbstractPacketSource;
 
 public class JsonWrapper extends AbstractPacketSource {
 

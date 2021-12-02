@@ -1,9 +1,9 @@
 package nl.iobyte.nodalcommunication.redis;
 
 import io.lettuce.core.pubsub.RedisPubSubAdapter;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.namespace.NamespaceComparator;
-import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.namespace.NamespaceComparator;
+import nl.iobyte.nodalcommunication.generic.Node;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ForkJoinPool;
 

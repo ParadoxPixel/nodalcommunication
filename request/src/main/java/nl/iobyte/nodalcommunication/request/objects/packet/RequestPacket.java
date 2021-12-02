@@ -1,7 +1,7 @@
 package nl.iobyte.nodalcommunication.request.objects.packet;
 
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacket;
 import java.util.concurrent.atomic.AtomicBoolean;
 

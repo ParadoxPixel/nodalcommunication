@@ -1,7 +1,5 @@
 package nl.iobyte.nodalcommunication.discovery.namespace;
 
-import nl.iobyte.nodalcommunication.namespace.NamespaceComparator;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;

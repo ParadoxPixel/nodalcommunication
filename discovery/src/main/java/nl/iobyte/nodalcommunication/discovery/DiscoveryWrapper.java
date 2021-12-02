@@ -1,13 +1,13 @@
 package nl.iobyte.nodalcommunication.discovery;
 
-import nl.iobyte.nodalcommunication.Node;
+import nl.iobyte.nodalcommunication.generic.Node;
 import nl.iobyte.nodalcommunication.discovery.network.objects.Network;
 import nl.iobyte.nodalcommunication.discovery.packet.NodeState;
 import nl.iobyte.nodalcommunication.discovery.packet.NodeStateHandler;
 import nl.iobyte.nodalcommunication.dsljson.JsonWrapper;
-import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
-import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketFactory;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketSource;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

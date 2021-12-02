@@ -1,10 +1,10 @@
 package nl.iobyte.nodalcommunication.dsljson.packet;
 
 import nl.iobyte.nodalcommunication.dsljson.JsonSerializer;
-import nl.iobyte.nodalcommunication.interfaces.ISerializer;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.interfaces.ISerializer;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.IPacketFactory;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
 
 public class PacketFactory implements IPacketFactory {
 

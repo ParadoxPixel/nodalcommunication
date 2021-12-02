@@ -1,4 +1,4 @@
-package nl.iobyte.nodalcommunication.interfaces;
+package nl.iobyte.nodalcommunication.generic.interfaces;
 
 public interface ISerializer {
 

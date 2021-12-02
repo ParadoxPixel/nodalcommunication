@@ -1,7 +1,6 @@
-package nl.iobyte.nodalcommunication.namespace;
+package nl.iobyte.nodalcommunication.generic.namespace;
 
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 public class NamespaceComparator {
 

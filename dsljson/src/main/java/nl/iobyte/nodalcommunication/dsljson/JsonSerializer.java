@@ -7,7 +7,7 @@ import nl.iobyte.nodalcommunication.dsljson.adapters.PacketAdapter;
 import nl.iobyte.nodalcommunication.dsljson.adapters.PacketPayloadAdapter;
 import nl.iobyte.nodalcommunication.dsljson.packet.Packet;
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
-import nl.iobyte.nodalcommunication.interfaces.ISerializer;
+import nl.iobyte.nodalcommunication.generic.interfaces.ISerializer;
 import java.nio.charset.StandardCharsets;
 
 public class JsonSerializer implements ISerializer {

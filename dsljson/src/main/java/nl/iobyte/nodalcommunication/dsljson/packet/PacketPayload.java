@@ -1,6 +1,6 @@
 package nl.iobyte.nodalcommunication.dsljson.packet;
 
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
 
 public abstract class PacketPayload implements IPacketPayload {
 

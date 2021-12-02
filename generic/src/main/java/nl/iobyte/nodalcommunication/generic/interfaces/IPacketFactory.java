@@ -1,7 +1,7 @@
-package nl.iobyte.nodalcommunication.interfaces;
+package nl.iobyte.nodalcommunication.generic.interfaces;
 
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
 
 public interface IPacketFactory {
 

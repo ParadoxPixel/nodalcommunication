@@ -1,8 +1,8 @@
-package nl.iobyte.nodalcommunication.objects;
+package nl.iobyte.nodalcommunication.generic.objects;
 
-import nl.iobyte.nodalcommunication.Node;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
-import nl.iobyte.nodalcommunication.interfaces.packet.IPacketPayload;
+import nl.iobyte.nodalcommunication.generic.Node;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.generic.interfaces.packet.IPacketPayload;
 
 public abstract class AbstractPacket<T extends IPacketPayload> implements IPacket<T> {
 
