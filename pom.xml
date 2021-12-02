@@ -61,6 +61,14 @@
                                     <shadedPattern>nl.iobyte.nodalcommunication.thirdparty.com.dslplatform</shadedPattern>
                                 </relocation>
                             </relocations>
+                            <filters>
+                                <filter>
+                                    <artifact>com.dslplatform:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
