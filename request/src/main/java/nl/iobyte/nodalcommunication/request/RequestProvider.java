@@ -6,11 +6,9 @@ import net.jodah.expiringmap.ExpiringMap;
 import nl.iobyte.nodalcommunication.dsljson.packet.PacketPayload;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacketHandler;
-import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestHandler;
 import nl.iobyte.nodalcommunication.request.interfaces.IRequestPacketHandler;
 import nl.iobyte.nodalcommunication.request.objects.Request;
-import nl.iobyte.nodalcommunication.request.objects.RequestNode;
 import nl.iobyte.nodalcommunication.request.objects.packet.RequestPacket;
 import nl.iobyte.nodalcommunication.request.objects.packet.RequestPayload;
 import java.util.Map;
@@ -58,16 +56,6 @@ public class RequestProvider implements IPacketHandler<RequestPayload> {
         requests.put(id, request);
 
         return new RequestPayload(id, channel, payload);
-    }
-
-    /**
-     * Wrap node for easier request handling
-     * @param node Node
-     * @param channel String
-     * @return RequestNode
-     */
-    public RequestNode wrapNode(Node node, String channel) {
-        return new RequestNode(node, channel, this);
     }
 
     /**
