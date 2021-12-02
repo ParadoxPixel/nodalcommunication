@@ -29,6 +29,13 @@ public interface IPacketSource {
     Node newNode(String id, IPacketFactory factory);
 
     /**
+     * Handle at start/stop
+     * @param start Runnable
+     * @param stop Runnable
+     */
+    void on(Runnable start, Runnable stop);
+
+    /**
      * Start source
      */
     void start();

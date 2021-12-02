@@ -9,11 +9,12 @@ import nl.iobyte.nodalcommunication.Node;
 import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
 import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.objects.AbstractPacketSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class RedisPacketSource implements IPacketSource {
+public class RedisPacketSource extends AbstractPacketSource {
 
     //Redis Client
     private final RedisURI uri;
@@ -117,6 +118,7 @@ public class RedisPacketSource implements IPacketSource {
 
         //Enable
         enabled.set(true);
+        onStart();
     }
 
     /**
@@ -127,6 +129,7 @@ public class RedisPacketSource implements IPacketSource {
             return;
 
         //Disable
+        onStop();
         enabled.set(false);
 
         //Sub

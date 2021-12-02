@@ -5,8 +5,9 @@ import nl.iobyte.nodalcommunication.dsljson.packet.PacketFactory;
 import nl.iobyte.nodalcommunication.interfaces.IPacketFactory;
 import nl.iobyte.nodalcommunication.interfaces.IPacketSource;
 import nl.iobyte.nodalcommunication.interfaces.packet.IPacket;
+import nl.iobyte.nodalcommunication.objects.AbstractPacketSource;
 
-public class JsonWrapper implements IPacketSource {
+public class JsonWrapper extends AbstractPacketSource {
 
     private final IPacketSource source;
     private final IPacketFactory factory;
@@ -78,12 +79,14 @@ public class JsonWrapper implements IPacketSource {
      */
     public void start() {
         source.start();
+        onStart();
     }
 
     /**
      * {@inheritDoc}
      */
     public void stop() {
+        onStop();
         source.stop();
     }
 

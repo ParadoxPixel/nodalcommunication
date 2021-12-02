@@ -21,6 +21,7 @@
         <module>redis</module>
         <module>discovery</module>
         <module>request</module>
+        <module>basic</module>
     </modules>
 
     <build>
