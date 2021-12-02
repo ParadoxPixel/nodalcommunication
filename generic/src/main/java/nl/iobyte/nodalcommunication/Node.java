@@ -53,14 +53,6 @@ public class Node {
     }
 
     /**
-     * Get type of packet
-     * @return Class<?>
-     */
-    public Class<?> getType() {
-        return factory.getType();
-    }
-
-    /**
      * Send packet to target
      * @param target String
      * @param channel String
