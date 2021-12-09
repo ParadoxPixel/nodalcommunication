@@ -28,10 +28,33 @@ public class RabbitMQPacketSource extends AbstractPacketSource {
 
     //Listeners
     private final List<String> nodeListeners = new ArrayList<>();
+    private final List<String> exchanges = new ArrayList<>();
 
     public RabbitMQPacketSource(ConnectionFactory connectionFactory, RabbitConfig config) {
         this.connectionFactory = connectionFactory;
         this.config = config;
+    }
+
+    public void exchange(String name, String type, String routing_key) throws Exception {
+        if(wrapper == null)
+            return;
+
+        if(exchanges.contains(name))
+            return;
+
+        try {
+            wrapper.getChannel().exchangeDeclare(
+                    "nodal."+name,
+                    type,
+                    false,
+                    true,
+                    null
+            );
+        } finally {
+            exchanges.add(name);
+        }
+
+        wrapper.getChannel().queueBind(wrapper.getId(), "nodal."+name, routing_key);
     }
 
     /**
@@ -49,7 +72,7 @@ public class RabbitMQPacketSource extends AbstractPacketSource {
             return;
 
         wrapper.sendCatch(
-                "nodal-"+packet.getChannel(),
+                "nodal."+packet.getChannel(),
                 target,
                 null,
                message.getBytes(StandardCharsets.UTF_8)
@@ -75,13 +98,9 @@ public class RabbitMQPacketSource extends AbstractPacketSource {
         }
 
         try {
-            wrapper.getChannel().exchangeDeclare(
-                    "nodal-"+channel,
-                    "topic"
-            );
-            wrapper.getChannel().queueBind(
-                    wrapper.getId(),
-                    "nodal-"+channel,
+            exchange(
+                    channel,
+                    "topic",
                     node.getId()
             );
         } catch (Exception e) {

@@ -99,8 +99,8 @@ public class DiscoveryWrapper extends JsonWrapper {
     public void start() {
         super.start();
         for(Node node : nodes.values()) {
-            node.register("node-state", NodeState.class, new NodeStateHandler(this, node));
-            node.broadcast("node-state", new NodeState(node.getId(), true));
+            node.register("state", NodeState.class, new NodeStateHandler(this, node));
+            node.broadcast("state", new NodeState(node.getId(), true));
         }
     }
 
@@ -109,7 +109,7 @@ public class DiscoveryWrapper extends JsonWrapper {
      */
     public void stop() {
         for(Node node : nodes.values())
-            node.broadcast("node-state", new NodeState(node.getId(), false));
+            node.broadcast("state", new NodeState(node.getId(), false));
 
         network.clear();
         super.stop();
