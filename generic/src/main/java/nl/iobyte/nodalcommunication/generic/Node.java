@@ -129,7 +129,7 @@ public class Node {
         if(packet instanceof AbstractPacket<?>)
             ((AbstractPacket<?>) packet).setNode(this);
 
-        List<Channel<?>> list = channels.get(id);
+        List<Channel<?>> list = channels.get(packet.getChannel());
         if(list == null || list.isEmpty())
             return;
 

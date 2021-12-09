@@ -22,6 +22,7 @@
         <module>discovery</module>
         <module>request</module>
         <module>basic</module>
+        <module>rabbitmq</module>
     </modules>
 
     <build>
@@ -80,6 +81,12 @@
                                 </filter>
                                 <filter>
                                     <artifact>de.mkammerer:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.MF</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>nl.iobyte:rabbitwrapper</artifact>
                                     <excludes>
                                         <exclude>META-INF/*.MF</exclude>
                                     </excludes>
