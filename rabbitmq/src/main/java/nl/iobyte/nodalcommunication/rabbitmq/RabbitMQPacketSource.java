@@ -30,9 +30,9 @@ public class RabbitMQPacketSource extends AbstractPacketSource {
     private final List<String> nodeListeners = new ArrayList<>();
     private final List<String> exchanges = new ArrayList<>();
 
-    public RabbitMQPacketSource(ConnectionFactory connectionFactory, RabbitConfig config) {
+    public RabbitMQPacketSource(ConnectionFactory connectionFactory, RabbitSourceConfig config) {
         this.connectionFactory = connectionFactory;
-        this.config = config;
+        this.config = config.toRabbit();
     }
 
     public void exchange(String name, String type, String routing_key) throws Exception {
